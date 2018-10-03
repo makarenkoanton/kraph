@@ -87,8 +87,8 @@ class Kraph(f: Kraph.() -> Unit) {
             fields += CursorConnection(name, Argument(argsMap), SelectionSet(selection.fields))
         }
 
-        fun func(name: String, args: Map<String, Any>, builder: FieldBlock) {
-            fields += Mutation(name, InputArgument(args), createSelectionSet(name, builder))
+        fun func(name: String, nameOfArgs: String = "input", args: Map<String, Any>, builder: FieldBlock) {
+            fields += Mutation(name, InputArgument(nameOfArgs, args), createSelectionSet(name, builder))
         }
 
         protected fun addField(name: String, args: Map<String, Any>? = null, builder: FieldBlock? = null) {

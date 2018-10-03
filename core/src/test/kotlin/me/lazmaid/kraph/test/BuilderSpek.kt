@@ -95,7 +95,7 @@ class BuilderSpek : Spek({
         given("sample mutation") {
             val query = Kraph {
                 mutation {
-                    func("registerUser", mapOf("email" to "abcd@efgh.com", "password" to "abcd1234", "age" to 30)) {
+                    func("registerUser", args = mapOf("email" to "abcd@efgh.com", "password" to "abcd1234", "age" to 30)) {
                         field("id")
                         field("token")
                     }

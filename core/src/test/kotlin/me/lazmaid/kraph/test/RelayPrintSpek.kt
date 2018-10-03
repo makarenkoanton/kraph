@@ -38,7 +38,7 @@ class RelayPrintSpek : Spek({
             )
         )
         for((args, title, expectation) in tests) {
-            val arguments = InputArgument(args)
+            val arguments = InputArgument(args = args)
             given(title) {
                 it("should print correctly in NORMAL mode") {
                     assertThat(arguments.print(PrintFormat.NORMAL, 0), equalTo(expectation.normal))
