@@ -48,7 +48,7 @@ class Kraph(f: Kraph.() -> Unit) {
     fun requestVariableString() = document.variables.print(PrintFormat.JSON, 0)
     fun requestOperationName() = document.operation.name
 
-    inner open class FieldBuilder {
+    open inner class FieldBuilder {
         internal val fields = arrayListOf<Field>()
 
         fun fieldObject(name: String, args: Map<String, Any>? = null, builder: FieldBlock) {
@@ -72,8 +72,8 @@ class Kraph(f: Kraph.() -> Unit) {
                              before: String? = null, after: String? = null,
                              builder: CursorBlock) {
             val argsMap = linkedMapOf<String, Any>()
-            if (first != -1) argsMap.put("first", first)
-            if (last != -1) argsMap.put("last", last)
+            if (first != -1) argsMap["first"] = first
+            if (last != -1) argsMap["last"] = last
             before?.let { argsMap.put("before", it) }
             after?.let { argsMap.put("after", it) }
 
@@ -91,7 +91,7 @@ class Kraph(f: Kraph.() -> Unit) {
             fields += Mutation(name, InputArgument(nameOfArgs, args), createSelectionSet(name, builder))
         }
 
-        protected fun addField(name: String, args: Map<String, Any>? = null, builder: FieldBlock? = null) {
+        private fun addField(name: String, args: Map<String, Any>? = null, builder: FieldBlock? = null) {
             val argNode = args?.let(::Argument)
             val selectionSet = builder?.let {
                 createSelectionSet(name, builder)
@@ -110,7 +110,7 @@ class Kraph(f: Kraph.() -> Unit) {
 
         fun pageInfo(f: FieldBuilder.() -> Unit) {
             val pageSelection = createSelectionSet("pageInfo", f)
-            if (!pageSelection.fields.map { it.name }.any { it in arrayOf("hasNextPage", "hasPreviousPage") }) {
+            if (!pageSelection.fields.asSequence().map { it.name }.any { it in arrayOf("hasNextPage", "hasPreviousPage") }) {
                 throw NoFieldsInSelectionSetException("Selection Set must contain hasNextPage and/or hasPreviousPage field")
             }
             fields += PageInfo(pageSelection)

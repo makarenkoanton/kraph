@@ -49,7 +49,7 @@ internal sealed class DataEntry {
     class ObjectData(private val values: List<Pair<String, DataEntry>>) : DataEntry() {
         override fun print(format: PrintFormat) =
             "{${ values.joinToString(", ") { (k, v) ->
-                "${k}: ${v.print(format)}"
+                "$k: ${v.print(format)}"
             } }}"
     }
 

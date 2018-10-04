@@ -18,6 +18,6 @@ internal class Variables : GraphQLNode() {
 
     fun asArgument(): Argument? =
             variables.takeIf { it.isNotEmpty() }
-                    ?.let { Argument(it.values.map { it.dollarName to it.type }.toMap()) }
+                    ?.run { Argument(values.map { it.dollarName to it.type }.toMap()) }
 }
 
