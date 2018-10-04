@@ -74,8 +74,8 @@ class Kraph(f: Kraph.() -> Unit) {
             val argsMap = linkedMapOf<String, Any>()
             if (first != -1) argsMap["first"] = first
             if (last != -1) argsMap["last"] = last
-            before?.let { argsMap.put("before", it) }
-            after?.let { argsMap.put("after", it) }
+            before?.let { argsMap["before"] = it }
+            after?.let { argsMap["after"] = it }
 
             if (argsMap.isEmpty()) {
                 throw IllegalArgumentException("There must be at least 1 argument for Cursor Connection")

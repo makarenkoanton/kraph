@@ -54,8 +54,6 @@ internal sealed class DataEntry {
     }
 
     class EnumData(private val value: Enum<*>): DataEntry() {
-        override fun print(format: PrintFormat): String {
-            return value.name
-        }
+        override fun print(format: PrintFormat): String = value.name
     }
 }

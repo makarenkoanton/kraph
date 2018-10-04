@@ -8,7 +8,5 @@ internal open class Argument(internal val args: Map<String, Any> = mapOf()) : Gr
     override fun print(
         format: PrintFormat,
         previousLevel: Int
-    ): String {
-        return "(${print(args, format)})"
-    }
+    ): String = "(${print(args, format)})"
 }
