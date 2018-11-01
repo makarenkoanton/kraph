@@ -116,7 +116,7 @@ class GraphQLPrintSpek : Spek({
     }
     describe("Mutation") {
         given("name RegisterUser with email and password as argument and payload contains id and token") {
-            val argNode = InputArgument(args = mapOf("email" to "abcd@efgh.com", "password" to "abcd1234"))
+            val argNode = InputArgument(mapOf("email" to "abcd@efgh.com", "password" to "abcd1234"))
             val setNode = SelectionSet(listOf(Field("id"), Field("token")))
             val node = Mutation("RegisterUser", argNode, setNode)
             it("should print correctly in NORMAL mode") {

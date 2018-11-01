@@ -3,7 +3,7 @@ package me.lazmaid.kraph.lang
 import me.lazmaid.kraph.types.KraphVariable
 import me.lazmaid.kraph.types.KraphVariableType
 
-internal abstract class GraphQLNode {
+abstract internal class GraphQLNode {
     var level = 0
 
     abstract fun print(format: PrintFormat, previousLevel: Int): String
@@ -37,7 +37,6 @@ internal abstract class GraphQLNode {
                 is KraphVariableType -> DataEntry.VariableType(value)
                 is List<*>  -> convertToArrayData(value)
                 is Map<*,*> -> convertToObjectData(value as Map<String, *>)
-                is Enum<*> -> DataEntry.EnumData(value)
                 else        -> throw RuntimeException("Unsupported Type: $value")
             }
 }
